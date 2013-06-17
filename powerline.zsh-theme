@@ -64,6 +64,24 @@ if [ "$POWERLINE_GIT_UNMERGED" = "" ]; then
   POWERLINE_GIT_UNMERGED="═"
 fi
 
+get_remote_status() {
+    remote=${$(git rev-parse --verify ${hook_com[branch]}@{upstream} --symbolic-full-name 2>/dev/null)/refs\/remotes\/}
+    if [[ -n ${remote} ]] ; then
+        ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
+        behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
+        if [ $ahead -eq 0 ] && [ $behind -gt 0 ]
+        then
+            echo " `echo $behind | tr -d ' '`"
+        elif [ $ahead -gt 0 ] && [ $behind -eq 0 ]
+        then
+            echo " `echo $ahead | tr -d ' '`"
+        elif [ $ahead -gt 0 ] && [ $behind -gt 0 ]
+        then
+            echo "diverged"
+        fi
+    fi
+}
+
 ZSH_THEME_GIT_PROMPT_PREFIX=" \ue0a0 "
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
 ZSH_THEME_GIT_PROMPT_DIRTY=" $POWERLINE_GIT_DIRTY"
@@ -85,7 +103,7 @@ ZSH_THEME_GIT_PROMPT_DIVERGED=" ⬍"
 # else
     if [ "$POWERLINE_SHOW_GIT_ON_RIGHT" = "" ]; then
         if [ "$POWERLINE_HIDE_GIT_PROMPT_STATUS" = "" ]; then
-            POWERLINE_GIT_INFO_LEFT=" %F{blue}%K{white}"$'\ue0b0'"%F{white}%F{black}%K{white}"$'$(git_prompt_info)$(git_prompt_status)%F{white}'
+            POWERLINE_GIT_INFO_LEFT=" %F{blue}%K{white}"$'\ue0b0'"%F{white}%F{black}%K{white}"$'$(git_prompt_info)$(git_prompt_status)$(get_remote_status)%F{white}'
         else
             POWERLINE_GIT_INFO_LEFT=" %F{blue}%K{white}"$'\ue0b0'"%F{white}%F{black}%K{white}"$'$(git_prompt_info)%F{white}'
         fi
