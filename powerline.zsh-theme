@@ -77,7 +77,7 @@ get_remote_status() {
             echo " `echo $ahead | tr -d ' '`"
         elif [ $ahead -gt 0 ] && [ $behind -gt 0 ]
         then
-            echo "diverged"
+            echo " `echo $behind | tr -d ' '` | `echo $ahead | tr -d ' '`"
         fi
     fi
 }
