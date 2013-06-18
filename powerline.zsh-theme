@@ -1,5 +1,20 @@
 # FreeAgent puts the powerline style in zsh !
 
+# The following link is a pretty good resources for color values:
+# http://www.calmar.ws/vim/color-output.png
+# COLORS
+DARKGREY=237
+LIGHTGREY=250
+OFFWHITE=254
+GREY=244
+LIGHTGREEN=148
+BLACK=0
+WHITE=15
+YELLOW=148
+PINK=161
+GREEN=22
+MIDGREEN=35
+
 if [ "$POWERLINE_DATE_FORMAT" = "" ]; then
   POWERLINE_DATE_FORMAT=%D{%Y-%m-%d}
 fi
@@ -11,7 +26,7 @@ fi
 if [ "$POWERLINE_RIGHT_A" = "mixed" ]; then
   POWERLINE_RIGHT_A=%(?."$POWERLINE_DATE_FORMAT".%F{red}✘ %?)
 elif [ "$POWERLINE_RIGHT_A" = "exit-status" ]; then
-  POWERLINE_RIGHT_A=%(?.%F{green}✔ %?.%F{red}✘ %?)
+  POWERLINE_RIGHT_A=%(?.%F{$PINK}✔ %?.%F{red}✘ %?)
 elif [ "$POWERLINE_RIGHT_A" = "date" ]; then
   POWERLINE_RIGHT_A="$POWERLINE_DATE_FORMAT"
 fi
@@ -41,7 +56,7 @@ if [ "$POWERLINE_GIT_DIRTY" = "" ]; then
 fi
 
 if [ "$POWERLINE_GIT_ADDED" = "" ]; then
-  POWERLINE_GIT_ADDED="%F{green}✚%F{black}"
+  POWERLINE_GIT_ADDED="%F{$MIDGREEN}✚%F{black}"
 fi
 
 if [ "$POWERLINE_GIT_MODIFIED" = "" ]; then
@@ -167,8 +182,8 @@ if [ $(id -u) -eq 0 ]; then
     POWERLINE_SEC1_BG=%K{red}
     POWERLINE_SEC1_FG=%F{red}
 else
-    POWERLINE_SEC1_BG=%K{green}
-    POWERLINE_SEC1_FG=%F{green}
+    POWERLINE_SEC1_BG=%K{$PINK}
+    POWERLINE_SEC1_FG=%F{$PINK}
 fi
 POWERLINE_SEC1_TXT=%F{black}
 if [ "$POWERLINE_DETECT_SSH" != "" ]; then
