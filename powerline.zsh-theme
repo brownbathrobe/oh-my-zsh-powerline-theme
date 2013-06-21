@@ -15,6 +15,9 @@ PINK=161
 GREEN=22
 MIDGREEN=35
 
+NORMAL_MODE_INDICATOR="%F{$PINK}✚%{$reset_color%}"
+INSERT_MODE_INDICATOR="%F{blue}✚%{$reset_color%}"
+
 if [ "$POWERLINE_DATE_FORMAT" = "" ]; then
   POWERLINE_DATE_FORMAT=%D{%Y-%m-%d}
 fi
