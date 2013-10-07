@@ -37,6 +37,12 @@ If you don't want date or time, you can choose what you want to display:
 POWERLINE_RIGHT_B="date replacement"
 ```
 
+Or if you don't want to display anything:
+
+```
+POWERLINE_RIGHT_B="none"
+```
+
 If you want to display date next to time:
 ```
 POWERLINE_RIGHT_A="date"
@@ -74,7 +80,7 @@ If you don't want to display your hostname (the green or red (root) colors are s
 POWERLINE_HIDE_HOST_NAME="true"
 ```
 
-If you don't want to hide git prompt status (new files, modified files, unmerged files, etc):
+If you want to hide git prompt status (new files, modified files, unmerged files, etc):
 ```
 POWERLINE_HIDE_GIT_PROMPT_STATUS="true"
 ```
